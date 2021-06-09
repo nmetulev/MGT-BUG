@@ -7,7 +7,10 @@
 <div class="text-center">
   <h1 class="display-4">Welcome</h1>
   <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-  <mgt-msal-provider client-id="37b3d4e3-7f97-4d68-97ee-286225cdc754"></mgt-msal-provider>
+  <mgt-msal2-provider client-id="37b3d4e3-7f97-4d68-97ee-286225cdc754"
+                      authority="https://login.microsoftonline.com/0a6bbd99-2bb9-419a-9531-2ed68cae955f"
+                      scopes="user.read">
+  </mgt-msal2-provider>
   <mgt-login></mgt-login>
   <mgt-people-picker></mgt-people-picker>
 </div>
