@@ -7,10 +7,17 @@
 <div class="text-center">
   <h1 class="display-4">Welcome</h1>
   <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-  <mgt-msal2-provider client-id="37b3d4e3-7f97-4d68-97ee-286225cdc754"
-                      authority="https://login.microsoftonline.com/0a6bbd99-2bb9-419a-9531-2ed68cae955f"
-                      scopes="user.read">
-  </mgt-msal2-provider>
+
+  <script>
+      mgt.Providers.globalProvider = new mgt.Msal2Provider({
+          clientId: "7164bdc2-7596-44d2-896c-f81e025cb06d",
+          authority: "https://login.microsoftonline.com/c99a2e66-f380-4494-a645-1e5c35c30dfa",
+          scopes: ["user.read", "calendars.read"],
+          loginHint: "nikola@msgraphdemo.onmicrosoft.com",
+          redirectUri: "/sso.html",
+          loginType: mgt.LoginType.Popup
+      });
+  </script>
   <mgt-login></mgt-login>
   <mgt-people-picker></mgt-people-picker>
 </div>
