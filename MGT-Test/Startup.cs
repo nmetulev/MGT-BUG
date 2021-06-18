@@ -13,6 +13,7 @@ using Microsoft.Identity.Web.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace MGT_Test
@@ -29,9 +30,19 @@ namespace MGT_Test
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-          .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
-
+     services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApp(o => {
+                    o.UsePkce = true;
+                    o.ClientId = "ab58afcf-ef01-4cc0-89fd-3cabceab38c3";
+                    o.TenantId = "801e6804-9cb1-4277-be16-491ffcc0070a";
+                    o.Domain = "https://localhost:5001";
+                    o.Instance = "https://login.microsoftonline.com";
+                    o.CallbackPath = "/signin-oidc";
+                    o.ResponseType = "code";
+                    var defaultBackChannel = new HttpClient();
+                    defaultBackChannel.DefaultRequestHeaders.Add("Origin", "thisismyapp");
+                    o.Backchannel = defaultBackChannel;
+                });
       services.AddAuthorization(options =>
       {
               // By default, all incoming requests will be authorized according to the default policy
